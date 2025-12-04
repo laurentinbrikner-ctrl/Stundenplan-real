@@ -1,11 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Meine Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertretungsplan – Gymnasium Carolinum</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #000;
+        }
+
+        header {
+            background: #0055aa;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            background: #ffffff;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .tab {
+            padding: 14px 25px;
+            cursor: pointer;
+            font-size: 18px;
+            border-bottom: 4px solid transparent;
+        }
+
+        .tab.active {
+            border-bottom: 4px solid #0055aa;
+            font-weight: bold;
+        }
+
+        iframe {
+            width: 100%;
+            height: 1200px;
+            border: none;
+        }
+    </style>
+
+    <script>
+        function showTab(tabId) {
+            document.getElementById("heute").style.display = "none";
+            document.getElementById("morgen").style.display = "none";
+
+            document.getElementById(tabId).style.display = "block";
+
+            document.getElementById("tab-heute").classList.remove("active");
+            document.getElementById("tab-morgen").classList.remove("active");
+
+            document.getElementById("tab-" + tabId).classList.add("active");
+        }
+    </script>
 </head>
+
 <body>
-    <h1>Hallo Welt!</h1>
-    <p>Meine erste Website auf dem iPad!</p>
+
+<header>
+    Vertretungsplan – Gymnasium Carolinum
+</header>
+
+<div class="tabs">
+    <div class="tab active" id="tab-heute" onclick="showTab('heute')">Heute</div>
+    <div class="tab" id="tab-morgen" onclick="showTab('morgen')">Morgen</div>
+</div>
+
+<!-- HEUTE -->
+<div id="heute">
+    <iframe src="https://gym-carolinum.webuntis.com/WebUntis/monitor?school=gym-carolinum&monitorType=subst&format=VP%20SuS%20IServ%20heute"></iframe>
+</div>
+
+<!-- MORGEN -->
+<div id="morgen" style="display:none;">
+    <iframe src="https://gym-carolinum.webuntis.com/WebUntis/monitor?school=gym-carolinum&monitorType=subst&format=VP%20SuS%20IServ%20morgen"></iframe>
+</div>
+
 </body>
 </html>
